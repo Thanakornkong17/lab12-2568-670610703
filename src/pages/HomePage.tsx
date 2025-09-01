@@ -22,6 +22,7 @@ interface Task {
   dueDate: Date | null;
 }
 
+
 export default function HomePage() {
   const [tasks, setTasks] = useState<Task[]>([
     {
@@ -111,32 +112,24 @@ export default function HomePage() {
                       Due: {task.dueDate.toLocaleDateString()}
                     </Text>
                   )}
-                  {/* แสดง Date & Time */}
-                  <Text size="xs" c="gray">
-                    Done at:
-                  </Text>
+                  {task.dueDate && task.isDone &&(
+                    <Text size="xs" c="Thanakorn">
+                      Done at: {task.dueDate.toLocaleDateString()} , {task.dueDate.toLocaleTimeString()}
+                    </Text>
+                  )}
                 </Stack>
                 {/* แสดง Button Done & Button Delete */}
                 <Group>
-                  <Button
-                    style={{
-                      backgroundColor: "#71c32fda",
-                      color: "#dce6e7ff",
-                    }}
-                    variant="light"
-                    size="xs"
-                    onClick={() => toggleDoneTask(task.id)}
-                  >
-                    Done
-                  </Button>
-                  <Button
-                    color="chanadda"
-                    variant="light"
-                    size="xs"
-                    onClick={() => deleteTask(task.id)}
-                  >
-                    Delete
-                  </Button>
+                 <Checkbox
+                  checked={task.isDone}            // controlled by state
+                  onChange={() => {toggleDoneTask(task.id); task.dueDate=new Date()}} 
+                  label="Done"
+                />
+                  
+                     <ActionIcon variant="filled" color="rgba(255, 92, 92, 1)" radius="xs" aria-label="Settings">
+                      <IconTrash style={{ width: '70%', height: '70%' }} stroke={1.5} onClick={() => deleteTask(task.id)}/>
+                   </ActionIcon>
+            
                 </Group>
               </Group>
             </Card>
