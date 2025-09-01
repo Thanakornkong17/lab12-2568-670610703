@@ -10,7 +10,7 @@ const theme = createTheme({
   colors: {
     Thanakorn: virtualColor({
       name: "Thanakorn",
-      dark: "pink",
+      dark: "yellow",
       light: "cyan",
     }),
   },
